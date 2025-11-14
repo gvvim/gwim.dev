@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+.quote {
+  font-family: 'Inknut Antiqua';
+  position: fixed;
+  bottom: 64px;
+  left: auto;
+  text-shadow: 0 0 5px lightblue;
+  font-size: 1.4rem;
+  text-align: center;
+  display: inline-block;
+  opacity: 1;
+  transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease;
+  will-change: opacity, filter, transform, text-shadow;
+}
+
+/* Visible = calm centered text */
+.quote.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Hidden = dispersing outward smoke */
+.quote.hidden {
+  animation: disperseOut 2s forwards ease-out;
+}
+
+/* outward dispersal */
+@keyframes disperseOut {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1) translate(0, 0);
+  }
+  30% {
+    filter: blur(4px);
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translate(
+        calc((var(--randx, 0.5) - 0.5) * 300px),
+        calc((var(--randy, 0.5) - 0.5) * 200px)
+      )
+      scale(1.2);
+  }
+}
+
+/* inward reappearance (centered fade-in) */
+.quote.visible {
+  animation: appearIn 2s forwards ease-out;
+}
+
+@keyframes appearIn {
+  0% {
+    opacity: 0;
+    filter: blur(15px);
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+/* subtle smoke shimmer */
+.quote::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.05),
+      transparent 60%
+    ),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.05), transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+  animation: smokeFloat 6s infinite ease-in-out;
+}
+
+@keyframes smokeFloat {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}

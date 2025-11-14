@@ -1,0 +1,99 @@
+.carousel-container {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+  align-items: center;
+}
+
+.carousel-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide-inner {
+  width: 90%;
+  height: fit-content;
+  /* scale: 2; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.3;
+  transform: scale(0.8);
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.carousel-slide-inner.active {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+
+.carousel-slide-inner.prev,
+.carousel-slide-inner.next {
+  transform: scale(0.9);
+  opacity: 0.5;
+  will-change: opacity;
+  transition: 200ms;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.carousel-slide-inner.prev:hover,
+.carousel-slide-inner.next:hover {
+  opacity: 0.75;
+}
+
+/* Navigation Dots */
+.carousel-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 2em;
+  transform: translateX(-50%);
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  gap: 6px;
+  /* background-color: black; */
+  clip-path: polygon(
+    4px 0, calc(100% - 4px) 0,
+    100% 4px, 100% calc(100% - 4px),
+    calc(100% - 4px) 100%, 4px 100%,
+    0 calc(100% - 4px), 0 4px
+  );
+}
+
+.carousel-dot {
+  width: 40px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.carousel-dot.active {
+  background-color: #fff;
+}
+
+.carousel-dot:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  outline: none;
+  border: none;
+}
+
+.carousel-dot:focus, .carousel-dot:focus-visible {
+  outline: none;
+  border: none;
+}

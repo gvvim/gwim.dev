@@ -1,0 +1,73 @@
+.hire-me {
+    background-color: #222222;
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    padding: 1.5em;
+    gap: 1.5em;
+}
+
+.hire-me-about {
+    width: 540px;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+}
+
+.globe {
+    align-self: center;
+    justify-self: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+label {
+    text-align: left;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    gap: 1rem;
+  }
+
+  h2 {
+    text-align: left;
+    margin: 0;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.8rem;
+    /* border-radius: 5px; */
+    /* border: 1px solid #ccc; */
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+.contact-form textarea {
+  height: 100%;
+  resize: none;
+}
+
+.contact-form button {
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: none;
+  background-color: whitesmoke;
+  color: black;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.contact-error {
+  color: red;
+  margin: 0;
+}
+
+.contact-success {
+  color: green;
+  margin: 0;
+}
