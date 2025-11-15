@@ -1,5 +1,5 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { Environment, Html, OrbitControls, useGLTF } from "@react-three/drei";
+import { Html, OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import "./ModelPreview.css";
@@ -11,17 +11,19 @@ interface ModelPreviewProps {
     url: string;
     fallbackUrl: string;
     sketchfabUrl?: string;
+    use3D?: boolean;
     useAlpha?: boolean;
 }
 
 // let modelCounter = 0;
 
-export default function ModelPreview({ url, sketchfabUrl, fallbackUrl, useAlpha = false }: ModelPreviewProps) {
+export default function ModelPreview({ url, sketchfabUrl, fallbackUrl, use3D = false, useAlpha = false }: ModelPreviewProps) {
   // const indexRef = useRef(modelCounter++);
   // const index = indexRef.current / 2;
 
   return (
     <div className="model-preview">
+      {use3D &&
       <Canvas
         gl={{ alpha: true, /*preserveDrawingBuffer: true*/ }}
         camera={{ fov: 45, near: 0.1, far: 5000 }}
@@ -29,14 +31,15 @@ export default function ModelPreview({ url, sketchfabUrl, fallbackUrl, useAlpha 
       >
         <Scene url={url} enableTransparency={useAlpha} fallbackUrl={fallbackUrl}/>
         {/* <CanvasCaptureButton name={`model_${index}`} /> */}
-      </Canvas>
-        <div className="model-links">
-            {sketchfabUrl && <a href={sketchfabUrl} target="_blank" className="model-link">
-                <div className="link-popup">Sketchfab</div>
-                <img src={sketchfabIcon} />
-            </a>}
-             
-        </div>
+      </Canvas>}
+      {!use3D && <img className="fallback-model" src={fallbackUrl} />}
+      <div className="model-links">
+          {sketchfabUrl && <a href={sketchfabUrl} target="_blank" className="model-link">
+              <div className="link-popup">Sketchfab</div>
+              <img src={sketchfabIcon} />
+          </a>}
+          
+      </div>
     </div>
   );
 }
@@ -106,7 +109,6 @@ function Scene({ url,  fallbackUrl, enableTransparency }: { url: string; fallbac
           </Html>
         }
       >
-        <Environment files="/skybox.hdr" background={false} />
         <ambientLight intensity={1.2} />
         <directionalLight intensity={7} position={[5, 8, 5]} />
         <directionalLight intensity={0.7} position={[-5, 8, -5]} />

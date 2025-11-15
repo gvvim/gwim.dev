@@ -43,7 +43,7 @@ const Carousel: React.FC<CarouselProps> = ({
   // Add fake slides to left and right for centering
   const extendedSlides = [null, ...children, null];
 
-  const targetOffset = (currentIndex + 1 - 1) * slideWidthPercent; // -1 because left placeholder
+  const targetOffset = currentIndex * slideWidthPercent;
 
   return (
     <div className="carousel-container">

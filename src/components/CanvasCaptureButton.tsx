@@ -2,7 +2,7 @@ import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 
-function saveCanvasImage(canvas: HTMLCanvasElement, filename = "canvas.jpg", quality = 0.9) {
+function saveCanvasImage(canvas: HTMLCanvasElement, filename = "canvas.webp", quality = 0.9) {
     const link = document.createElement("a");
     link.download = filename;
     link.href = canvas.toDataURL("image/webp", quality);

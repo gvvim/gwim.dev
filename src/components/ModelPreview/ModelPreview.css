@@ -1,14 +1,15 @@
 .model-preview {
     /* border: 1px solid white; */
     height: 600px;
-    width: 600px;
+    min-width: 500px;
+    max-width: 33%;
     overflow: hidden;
 }
 
-.model-preview canvas {
+.model-preview canvas, .model-preview img {
     width: 100% !important;
     height: 100% !important;
-    cursor:all-scroll;
+    cursor: all-scroll;
     filter: drop-shadow(0 0 4px white);
 }
 

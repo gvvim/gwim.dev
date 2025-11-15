@@ -28,7 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('src/assets/dark-soul-fantasy-knight.jpg');
+  background-image: url('src/assets/dark-soul-fantasy-knight.webp');
   background-size: contain;
   overflow: hidden;
 }

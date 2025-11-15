@@ -1,10 +1,10 @@
 import { useEffect, useRef, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { Environment, Html } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 import Particles from "./Particles";
 import Model from "./Model";
-import CanvasCaptureButton from "./CanvasCaptureButton";
+// import CanvasCaptureButton from "./CanvasCaptureButton";
 
 const cameraPositions: THREE.Vector3[] = [
   new THREE.Vector3(0, 2.5, 2),
@@ -120,7 +120,6 @@ export default function Background3D({ page }: Background3DProps) {
               position={[-1.5, 3.3, -1.7]} 
             />
             <Particles count={200} size={.1} boxSize={[7, 4, 7]} speed={.25} scaleVariation={.2}/>
-            <Environment files="/skybox.hdr" background={false} />
             <Model url="/models/knight.glb" activeAction={knightAnims[page]} />
             {/* <CanvasCaptureButton name="background" /> */}
           </Suspense>

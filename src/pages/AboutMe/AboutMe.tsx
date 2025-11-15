@@ -2,7 +2,7 @@ import React from "react";
 import GitHubCalendar from 'react-github-calendar';
 
 import "./AboutMe.css";
-import photo from '../../assets/profile.jpg'
+import photo from '../../assets/profile.webp'
 import githubIcon from '../../assets/icons/github.svg'
 import linkedinIcon from '../../assets/icons/linkedin.svg'
 import sketchfabIcon from '../../assets/icons/sketchfab.svg'

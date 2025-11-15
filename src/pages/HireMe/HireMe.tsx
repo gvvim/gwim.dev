@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Globe from 'react-globe.gl';
 import "./HireMe.css";
-import earthDayTexture from '../../assets/2k_earth_day.jpg'
-import earthNightTexture from '../../assets/2k_earth_night.jpg'
-import earthBumpTexture from '../../assets/earthbump1k.jpg'
+import earthDayTexture from '../../assets/2k_earth_day.webp'
+import earthNightTexture from '../../assets/2k_earth_night.webp'
+import earthBumpTexture from '../../assets/earthbump1k.webp'
 
 interface HireMeProps {
   autoRotate?: boolean;

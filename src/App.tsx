@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, lazy } from "react";
+import * as THREE from "three";
 
 import "./App.css";
 import DateTimeLabel from "./components/DateTimeLabel/DateTimeLabel";
@@ -16,8 +17,30 @@ import { useGLTF } from "@react-three/drei";
 const LazyBackground3D = lazy(() => import("./components/Background3D"));
 const LazyModelPreview = lazy(() => import("./components/ModelPreview/ModelPreview"));
 
+// For devices that don't support webgl/webgl2 etc
+function canThreeRun() {
+  try {
+    const renderer = new THREE.WebGLRenderer({
+      powerPreference: "high-performance",
+    });
+    renderer.dispose();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 function App() {
   const [page, setPage] = useState(0);
+
+  const [threeEnabled, setThreeEnabled] = useState(false);
+  const [modelsVisible, setModelsVisible] = useState(false);
+  useEffect(() => { 
+    const id = setTimeout(() => {
+      setThreeEnabled(canThreeRun());
+    }, 20);
+    return () => clearTimeout(id);
+  } , []);
 
   const maxPage = 6;
 
@@ -37,7 +60,10 @@ function App() {
   const pageRef = useRef(page);
   const carouselRef = useRef(carouselState);
 
-  useEffect(() => { pageRef.current = page; }, [page]);
+  useEffect(() => { 
+    pageRef.current = page; 
+    setModelsVisible(threeEnabled && page === 4);
+  }, [page]);
   useEffect(() => { carouselRef.current = carouselState; }, [carouselState]);
 
   useEffect(() => {
@@ -130,11 +156,15 @@ function App() {
     }));
   };
 
+  const checkModelVisible = (modelIndex: number) => {
+    return modelsVisible && modelIndex >= carouselState[4].subPage - 2 && modelIndex <= carouselState[4].subPage + 2;
+  }
+
   return (
     <>
-      <LazyBackground3D page={page}/>
+      {threeEnabled && <LazyBackground3D page={page}/> }
+      {!threeEnabled && <img className="fallback-background" src="/fallback/background_capture.webp" /> }
       <div className="sidebar">
-
         <div className="sidebar-top">
           <div className="clip-shadow">
             <img className="sidebar-top-avatar clip" src={avatarUrl} />
@@ -199,42 +229,42 @@ function App() {
           >
             <ProjectPreview 
               title="Raytracing using Compute Shaders (Godot)" 
-              imgUrl="https://github.com/gvvim/Godot4-Raytracing/raw/main/Screenshots/Screenshot%202023-08-10_Cornell.png"
+              imgUrl="/projects/raytracing.webp"
               githubUrl="https://github.com/gvvim/Godot4-Raytracing"
             />
             <ProjectPreview 
               title="Smooth shading for marching cubes (Unity)" 
-              imgUrl="https://camo.githubusercontent.com/cc3d975b42f77911552ed92e54a18a3a5ea9d2862d0a23f23d29a6ba353dc5e9/68747470733a2f2f692e696d6775722e636f6d2f707a4e566f45462e706e67"
+              imgUrl="/projects/marching_cubes.webp"
               githubUrl="https://github.com/gvvim/Procedural-Terrain" 
             />
             <ProjectPreview 
               title="Rust and Ruin Status Effect System (Godot)" 
-              imgUrl="/projects/rar_status.jpg"
+              imgUrl="/projects/rar_status.webp"
               youtubeUrl="https://www.youtube.com/watch?v=E8hLK4xq54o"
             />
             <ProjectPreview 
               title="R&R Player Customization / Codex (Godot)" 
-              imgUrl="/projects/rar_codex.jpg"
+              imgUrl="/projects/rar_codex.webp"
               youtubeUrl="https://www.youtube.com/watch?v=kg3xfEGTqac"
             />
             <ProjectPreview 
               title="R&R Biomes (Godot)" 
-              imgUrl="/projects/rar_biomes.jpg"
+              imgUrl="/projects/rar_biomes.webp"
               youtubeUrl="https://www.youtube.com/watch?v=EMts0G4KKiA"
             />
             <ProjectPreview 
               title="R&R Active Ability VFX (Godot)" 
-              imgUrl="/projects/rar_abilities.jpg"
+              imgUrl="/projects/rar_abilities.webp"
               youtubeUrl="https://www.youtube.com/watch?v=bicOy6Yxu9U"
             />
             <ProjectPreview 
               title="Platforming Mechanics (Godot)"
-              imgUrl="/projects/platformer.jpg"
+              imgUrl="/projects/platformer.webp"
               youtubeUrl="https://www.youtube.com/watch?v=L07R3wHSnXs"
             />
             <ProjectPreview 
               title="Procedural Animation System (Godot)"
-              imgUrl="/projects/platformer_2.jpg"
+              imgUrl="/projects/platformer_2.webp"
               youtubeUrl="https://www.youtube.com/watch?v=RVDLgLMg498"
             />
           </Carousel>
@@ -253,40 +283,40 @@ function App() {
           >
             <ProjectPreview 
               title="Gwim.dev (React/Three)"
-              imgUrl="/projects/gwim_dev.jpg"
+              imgUrl="/projects/gwim_dev.webp"
               githubUrl="https://github.com/gvvim/gwim.dev"
               demoUrl="https://gwim.dev/"
             />
             <ProjectPreview 
               title="Bite Gameworks website (Typescript/Vite/Gulp)"
-              imgUrl="/projects/bite_gameworks_website.png"
+              imgUrl="/projects/bite_gameworks_website.webp"
               githubUrl="https://github.com/gvvim/bitegameworks"
               demoUrl="https://bitegameworks.net/"
             />
             <ProjectPreview 
               title="Rust and Ruin HUD (Godot)" 
-              imgUrl="/projects/rar_hud.png"
+              imgUrl="/projects/rar_hud.webp"
               youtubeUrl="https://www.youtube.com/watch?v=5yKrbmaSkW4"
             />
             <ProjectPreview 
               title="Neural Net Playground (Angular/.NET/Pytorch)" 
-              imgUrl="/projects/neural_net_playground.png"
+              imgUrl="/projects/neural_net_playground.webp"
               githubUrl="https://github.com/gvvim/neural-net-playground" 
               youtubeUrl="https://www.youtube.com/watch?v=heXn0A4PYLg"
             />
             <ProjectPreview 
               title="Fly Away game (PixiJS/GSAP)" 
-              imgUrl="/projects/fly_away.jpg"
+              imgUrl="/projects/fly_away.webp"
               demoUrl="https://www.youtube.com/watch?v=ge1O2jVy1YQ/"
             />
             <ProjectPreview 
               title="Obsidian.md Pomodoro widget (Typescript)" 
-              imgUrl="https://github.com/gvvim/obsidian-pomodoro-widget/raw/main/doc/theme_examples.png" 
+              imgUrl="/projects/pomodoro.webp" 
               githubUrl="https://github.com/gvvim/obsidian-pomodoro-widget"
             />
             <ProjectPreview 
               title="Island survival game (Javascript/Canvas)" 
-              imgUrl="/projects/island_survival.png"
+              imgUrl="/projects/island_survival.webp"
               githubUrl="https://github.com/gvvim/web-survival-game"
               demoUrl="https://gvvim.github.io/web-survival-game/"
             />
@@ -304,16 +334,16 @@ function App() {
               autoPlay={false}
               onInit={(count) => updateCarouselCount(4, count)}
             >
-              <LazyModelPreview url="/models/knight_preview.glb" fallbackUrl="/fallback/model_0_capture.webp" sketchfabUrl="https://skfb.ly/pDvpq" useAlpha/>
-              <LazyModelPreview url="/models/ryn.glb" fallbackUrl="/fallback/model_1_capture.webp" sketchfabUrl="https://skfb.ly/pDuVO" />
-              <LazyModelPreview url="/models/stalker.glb" fallbackUrl="/fallback/model_2_capture.webp" sketchfabUrl="https://skfb.ly/pDuU8" />
-              <LazyModelPreview url="/models/grunt.glb" fallbackUrl="/fallback/model_3_capture.webp" sketchfabUrl="https://skfb.ly/pDuTH" />
-              <LazyModelPreview url="/models/scrapper.glb" fallbackUrl="/fallback/model_4_capture.webp" sketchfabUrl="https://skfb.ly/pDuSQ" />
-              <LazyModelPreview url="/models/sniper.glb" fallbackUrl="/fallback/model_5_capture.webp" sketchfabUrl="https://skfb.ly/pDuUF" />
-              <LazyModelPreview url="/models/drone.glb" fallbackUrl="/fallback/model_6_capture.webp" sketchfabUrl="https://skfb.ly/pDuTy" />
-              <LazyModelPreview url="/models/buffer.glb" fallbackUrl="/fallback/model_7_capture.webp" sketchfabUrl="https://skfb.ly/pDuSI" />
-              <LazyModelPreview url="/models/barrager.glb" fallbackUrl="/fallback/model_8_capture.webp" sketchfabUrl="https://skfb.ly/pDuRY" />
-              <LazyModelPreview url="/models/exploder.glb" fallbackUrl="/fallback/model_9_capture.webp" sketchfabUrl="https://skfb.ly/pDuSy" />
+              <LazyModelPreview use3D={checkModelVisible(0)} url="/models/knight_preview.glb" fallbackUrl="/fallback/model_0_capture.webp" sketchfabUrl="https://skfb.ly/pDvpq" useAlpha/>
+              <LazyModelPreview use3D={checkModelVisible(1)} url="/models/ryn.glb" fallbackUrl="/fallback/model_1_capture.webp" sketchfabUrl="https://skfb.ly/pDuVO" />
+              <LazyModelPreview use3D={checkModelVisible(2)} url="/models/stalker.glb" fallbackUrl="/fallback/model_2_capture.webp" sketchfabUrl="https://skfb.ly/pDuU8" />
+              <LazyModelPreview use3D={checkModelVisible(3)} url="/models/grunt.glb" fallbackUrl="/fallback/model_3_capture.webp" sketchfabUrl="https://skfb.ly/pDuTH" />
+              <LazyModelPreview use3D={checkModelVisible(4)} url="/models/scrapper.glb" fallbackUrl="/fallback/model_4_capture.webp" sketchfabUrl="https://skfb.ly/pDuSQ" />
+              <LazyModelPreview use3D={checkModelVisible(5)} url="/models/sniper.glb" fallbackUrl="/fallback/model_5_capture.webp" sketchfabUrl="https://skfb.ly/pDuUF" />
+              <LazyModelPreview use3D={checkModelVisible(6)} url="/models/drone.glb" fallbackUrl="/fallback/model_6_capture.webp" sketchfabUrl="https://skfb.ly/pDuTy" />
+              <LazyModelPreview use3D={checkModelVisible(7)} url="/models/buffer.glb" fallbackUrl="/fallback/model_7_capture.webp" sketchfabUrl="https://skfb.ly/pDuSI" />
+              <LazyModelPreview use3D={checkModelVisible(8)} url="/models/barrager.glb" fallbackUrl="/fallback/model_8_capture.webp" sketchfabUrl="https://skfb.ly/pDuRY" />
+              <LazyModelPreview use3D={checkModelVisible(9)} url="/models/exploder.glb" fallbackUrl="/fallback/model_9_capture.webp" sketchfabUrl="https://skfb.ly/pDuSy" />
             </Carousel>
         </div>
 
