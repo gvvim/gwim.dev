@@ -28,7 +28,7 @@ const AboutMe: React.FC = () => {
                 <br/>
                 In my free time I develop games and create 3D models.
             </div>
-            <div className="git-calendar"><GitHubCalendar username="gvvim" /></div>
+            <div className="git-calendar"><GitHubCalendar username="gvvim" blockSize={8} /></div>
             <div className="about-bottom">
 
                 <div className="about-links">

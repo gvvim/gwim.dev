@@ -37,6 +37,12 @@
   align-content: center;
 }
 
+@media (max-width: 768px) {
+  .skills {
+    scale: 0.8;
+  }
+}
+
 @media (max-width: 480px) {
   .skills {
     scale: 0.45;
@@ -49,11 +55,5 @@
 
   .skill:not(:hover) p {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .skills {
-    scale: 0.8;
   }
 }

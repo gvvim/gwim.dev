@@ -1,5 +1,5 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { Html, OrbitControls, useGLTF } from "@react-three/drei";
+import { Environment, Html, OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import "./ModelPreview.css";
@@ -112,6 +112,7 @@ function Scene({ url,  fallbackUrl, enableTransparency }: { url: string; fallbac
         <ambientLight intensity={1.2} />
         <directionalLight intensity={7} position={[5, 8, 5]} />
         <directionalLight intensity={0.7} position={[-5, 8, -5]} />
+        <Environment files="/skybox.hdr" environmentIntensity={0.3}/>
 
         <primitive object={model} />
 

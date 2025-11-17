@@ -1,5 +1,6 @@
 .hire-me {
     background-color: #222222;
+    max-width: 1000px;
     display: flex;
     height: fit-content;
     width: fit-content;
@@ -8,7 +9,6 @@
 }
 
 .hire-me-about {
-    width: 540px;
     text-align: justify;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,8 @@ label {
 .contact-form {
     display: flex;
     flex-direction: column;
-    min-width: 500px;
+    /* width: 50%; */
+    min-width: 400px;
     gap: 1rem;
   }
 
@@ -72,19 +73,18 @@ label {
   margin: 0;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .hire-me {
+    max-width: 100%;
     flex-direction: column-reverse;
-    margin-right: -32px;
-  }
-
-  .hire-me-about {
-    width: 300px;
-    position: relative;
   }
 
   .contact-form {
-    min-width: 300px;
+    min-width: unset;
+  }
+
+  .hire-me-about {
+    position: relative;
   }
 
   .globe {
@@ -95,18 +95,13 @@ label {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .hire-me {
     flex-direction: column-reverse;
     margin-right: -32px;
   }
 
   .hire-me-about {
-    width: 600px;
     position: relative;
-  }
-
-  .contact-form {
-    min-width: 600px;
   }
 }
