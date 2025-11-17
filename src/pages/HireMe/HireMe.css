@@ -2,8 +2,8 @@
     background-color: #222222;
     max-width: 1000px;
     display: flex;
-    height: fit-content;
-    width: fit-content;
+    height: 100%;
+    width: 100%;
     padding: 1.5em;
     gap: 1.5em;
 }
@@ -28,7 +28,6 @@ label {
 .contact-form {
     display: flex;
     flex-direction: column;
-    /* width: 50%; */
     min-width: 400px;
     gap: 1rem;
   }
@@ -73,9 +72,9 @@ label {
   margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .hire-me {
-    max-width: 100%;
+    max-width: 90%;
     flex-direction: column-reverse;
   }
 
@@ -92,16 +91,5 @@ label {
     scale: 0.5;
     bottom: -190px;
     right: -100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hire-me {
-    flex-direction: column-reverse;
-    margin-right: -32px;
-  }
-
-  .hire-me-about {
-    position: relative;
   }
 }

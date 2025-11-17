@@ -61,3 +61,9 @@
     height: 32px;
     padding: 8px;
 }
+
+@media (max-width: 768px) {
+    .project {
+        font-size: 12px;
+    }
+}

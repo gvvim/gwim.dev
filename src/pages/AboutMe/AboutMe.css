@@ -53,7 +53,7 @@
     padding: 1.25em;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .about-text {
@@ -117,10 +117,40 @@
     height: 24px;
 }
 
+.git-calendar svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.git-calendar > .react-activity-calendar {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+}
+
 @media (max-width: 1050px) {
     .about-me {
         flex-direction: column;
         width: 100%;
+        max-width: 100%;
+    }
+
+    .git-calendar {
+        width: 100%; 
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .git-calendar table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+    
+    .git-calendar td,
+    .git-calendar th {
+        padding: 0;
     }
 
     .about-text {
