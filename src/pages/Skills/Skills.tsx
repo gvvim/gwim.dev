@@ -17,21 +17,23 @@ import audacityIcon from "../../assets/icons/audacity.svg";
 
 const Skills: React.FC = () => {
   return (
-    <Orbit radius={450} duration={80} squash={0.5} depthScale={0.6}>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={reactIcon}/>React</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={angularIcon}/>Angular</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={typescriptIcon}/>Typescript</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={csharpIcon}/>C#</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={javaIcon}/>Java</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={pythonIcon}/>Python</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={gitIcon}/>Git</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={unityIcon}/>Unity</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={godotIcon}/>Godot</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={blenderIcon}/>Blender</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={figmaIcon}/>Figma</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={photoshopIcon}/>Photoshop</div></div>
-        <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={audacityIcon}/>Audacity</div></div>
-    </Orbit>
+    <div className="skills">
+      <Orbit radius={350} duration={80} squash={0.5} depthScale={0.6}>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={reactIcon}/><p>React</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={angularIcon}/><p>Angular</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={typescriptIcon}/><p>Typescript</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={csharpIcon}/><p>C#</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={javaIcon}/><p>Java</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={pythonIcon}/><p>Python</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={gitIcon}/><p>Git</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={unityIcon}/><p>Unity</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={godotIcon}/><p>Godot</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={blenderIcon}/><p>Blender</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={figmaIcon}/><p>Figma</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={photoshopIcon}/><p>Photoshop</p></div></div>
+          <div className="skill-shadow"><div className="skill"><img className="skill-icon" src={audacityIcon}/><p>Audacity</p></div></div>
+      </Orbit>
+    </div>
   );
 };
 

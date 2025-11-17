@@ -42,11 +42,13 @@
   right: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: bottom;
 }
 
 .sidebar-top {
   position: absolute;
+  left: auto;
   top: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -62,8 +64,15 @@
 }
 
 .sidebar-top p {
+  opacity: 0;
+  will-change: opacity;
+  transition: all 300ms;
   text-wrap: wrap;
   margin: 0;
+}
+
+.sidebar:hover .sidebar-top p {
+  opacity: 1;
 }
 
 .sidebar-top p:last-child {
@@ -210,7 +219,7 @@
 .nav {
   display: flex;
   justify-content: center;
-  margin: 25%;
+  margin-left: 16px;
   will-change: margin;
   transition: all 500ms ease;
 }
@@ -400,3 +409,37 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 } */
+
+@media (max-width: 480px) {
+  .sidebar {
+      width: 32px;
+  }
+
+  .sidebar:hover {
+      width: 150px;
+  }
+
+  .sidebar:hover .nav-list {
+      opacity: 1;
+      width: fit-content;
+      margin: 8px;
+  }
+
+  .sidebar-top {
+      flex-direction: column;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px;
+      gap: 8px;
+      text-align: center;
+  }
+
+  .sidebar-top-avatar {
+      width: 24px;
+      height: 24px;
+  }
+
+  .nav {
+      margin-left: 0;
+  }
+}

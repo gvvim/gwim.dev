@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, lazy } from "react";
 import * as THREE from "three";
 
 import "./App.css";
+
 import DateTimeLabel from "./components/DateTimeLabel/DateTimeLabel";
 import Carousel from "./components/Carousel/Carousel";
 import ProjectPreview from "./components/ProjectPreview/ProjectPreview";
@@ -68,43 +69,38 @@ function App() {
 
   useEffect(() => {
     let isThrottled = false;
-
-    const handleWheel = (event: WheelEvent) => {
-      if (isThrottled) return;
+    let touchStartY = 0;
+  
+    const throttle = () => {
       isThrottled = true;
       setTimeout(() => (isThrottled = false), 100);
-    
+    };
+  
+    const handleScrollDirection = (direction: "up" | "down") => {
       const currentPage = pageRef.current;
-    
-      // If this page has a carousel
+  
       if (carouselRef.current[currentPage]) {
         const { subPage, subPageCount } = carouselRef.current[currentPage];
-    
-        if (event.deltaY > 0) {
+  
+        if (direction === "down") {
           // SCROLL DOWN
           if (subPage < subPageCount - 1) {
-            // advance subpage
             setCarouselState((prev) => ({
               ...prev,
               [currentPage]: { ...prev[currentPage], subPage: subPage + 1 },
             }));
           } else {
-            // reached end of subpages -> move to next main page and reset that page's subPage
             const nextPage = Math.min(currentPage + 1, maxPage);
-    
-            // reset subpage for nextPage (only affects nextPage entry)
             setCarouselState((prev) => ({
               ...prev,
               [nextPage]: {
-                // preserve any other fields for that page, but force subPage to 0
                 ...(prev[nextPage] ?? {}),
                 subPage: 0,
               },
             }));
-    
             setPage(nextPage);
           }
-        } else if (event.deltaY < 0) {
+        } else {
           // SCROLL UP
           if (subPage > 0) {
             setCarouselState((prev) => ({
@@ -112,17 +108,14 @@ function App() {
               [currentPage]: { ...prev[currentPage], subPage: subPage - 1 },
             }));
           } else {
-            // go to previous main page (no reset required)
             const prevPage = Math.max(currentPage - 1, 0);
             setPage(prevPage);
           }
         }
       } else {
-        // Non-carousel page: normal page navigation
-        if (event.deltaY > 0) {
+        // Non-carousel page
+        if (direction === "down") {
           const nextPage = Math.min(currentPage + 1, maxPage);
-    
-          // Reset subpage on the destination page in case it has a carousel
           setCarouselState((prev) => ({
             ...prev,
             [nextPage]: {
@@ -130,17 +123,51 @@ function App() {
               subPage: 0,
             },
           }));
-    
           setPage(nextPage);
-        } else if (event.deltaY < 0) {
+        } else {
           setPage(Math.max(currentPage - 1, 0));
         }
       }
-    };    
-
+    };
+  
+    const handleWheel = (event: WheelEvent) => {
+      if (isThrottled) return;
+      throttle();
+  
+      if (event.deltaY > 0) handleScrollDirection("down");
+      else if (event.deltaY < 0) handleScrollDirection("up");
+    };
+  
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+  
+    const handleTouchMove = (e: TouchEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName.toLowerCase() === "canvas" || isThrottled) return;
+  
+      const deltaY = e.touches[0].clientY - touchStartY;
+  
+      // require minimum swipe distance (avoid minor finger movement)
+      if (Math.abs(deltaY) < 100) return;
+  
+      throttle();
+      if (deltaY < 0) handleScrollDirection("down");
+      else handleScrollDirection("up");
+  
+      touchStartY = e.touches[0].clientY;
+    };
+  
     window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, [maxPage]);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+  
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [maxPage]);  
 
   const updateCarousel = (pageNum: number, subPage: number) => {
     setCarouselState((prev) => ({

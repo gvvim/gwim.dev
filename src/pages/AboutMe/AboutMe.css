@@ -2,7 +2,7 @@
     position: relative;
     background-color: #222222;
     display: flex;
-    height: 420px;
+    min-height: 420px;
 }
 
 .photo {
@@ -118,4 +118,60 @@
 .download-btn>img {
     width: 24px;
     height: 24px;
+}
+
+@media (max-width: 480px) {
+    .about-me {
+        flex-direction: column;
+        max-width: 340px;
+        margin-right: -32px;
+    }
+
+    .photo {
+        max-width: unset;
+        width: 100%;
+        max-height: 160px;
+        object-fit: cover;
+    }
+    
+    .photo-wrapper {
+        position: relative;
+        max-width: unset;
+    }
+
+    .git-calendar {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .about-bottom {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-me {
+        flex-direction: column;
+        max-width: 600px;
+        margin-right: -32px;
+    }
+
+    .photo {
+        max-width: unset;
+        width: 100%;
+        max-height: 240px;
+        object-fit: cover;
+    }
+    
+    .photo-wrapper {
+        position: relative;
+        max-width: unset;
+    }
+
+    .git-calendar {
+        width: 100%;
+        overflow-x: scroll;
+    }
 }

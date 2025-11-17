@@ -71,3 +71,42 @@ label {
   color: green;
   margin: 0;
 }
+
+@media (max-width: 480px) {
+  .hire-me {
+    flex-direction: column-reverse;
+    margin-right: -32px;
+  }
+
+  .hire-me-about {
+    width: 300px;
+    position: relative;
+  }
+
+  .contact-form {
+    min-width: 300px;
+  }
+
+  .globe {
+    position: absolute;
+    scale: 0.5;
+    bottom: -190px;
+    right: -100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hire-me {
+    flex-direction: column-reverse;
+    margin-right: -32px;
+  }
+
+  .hire-me-about {
+    width: 600px;
+    position: relative;
+  }
+
+  .contact-form {
+    min-width: 600px;
+  }
+}

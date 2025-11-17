@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Carousel.css";
 
 interface CarouselProps {
@@ -19,6 +19,14 @@ const Carousel: React.FC<CarouselProps> = ({
   children,
 }) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isVertical, setIsVertical] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const onResize = () => setIsVertical(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  
   const slideCount = children.length;
   const visibleSlides = 3;
   const slideWidthPercent = 100 / visibleSlides;
@@ -51,7 +59,7 @@ const Carousel: React.FC<CarouselProps> = ({
         className="carousel-track"
         style={{
           display: "flex",
-          transform: `translateX(-${targetOffset}%)`,
+          transform: isVertical ? `translateY(-${targetOffset}%)` : `translateX(-${targetOffset}%)`,
           transition: "transform 0.5s ease",
         }}
       >

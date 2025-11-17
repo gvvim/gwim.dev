@@ -32,7 +32,7 @@ export default function ModelPreview({ url, sketchfabUrl, fallbackUrl, use3D = f
         <Scene url={url} enableTransparency={useAlpha} fallbackUrl={fallbackUrl}/>
         {/* <CanvasCaptureButton name={`model_${index}`} /> */}
       </Canvas>}
-      {!use3D && <img className="fallback-model" src={fallbackUrl} />}
+      {!use3D && <div className="fallback-model" style={{backgroundImage: `url(${fallbackUrl})`}}>3D Viewer Not Supported</div>}
       <div className="model-links">
           {sketchfabUrl && <a href={sketchfabUrl} target="_blank" className="model-link">
               <div className="link-popup">Sketchfab</div>

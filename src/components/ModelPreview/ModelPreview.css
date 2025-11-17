@@ -1,12 +1,17 @@
 .model-preview {
-    /* border: 1px solid white; */
-    height: 600px;
-    min-width: 500px;
-    max-width: 33%;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
-.model-preview canvas, .model-preview img {
+.fallback-model {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.model-preview canvas, .fallback-model {
     width: 100% !important;
     height: 100% !important;
     cursor: all-scroll;

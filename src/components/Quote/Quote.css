@@ -97,3 +97,11 @@
     transform: scale(1.1);
   }
 }
+
+@media (max-width: 480px) {
+  .quote {
+    /* text-shadow: 0 0 5px lightblue; */
+    font-size: 18px;
+    padding-left: 24px;
+  }
+}

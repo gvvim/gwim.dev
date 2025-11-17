@@ -9,7 +9,7 @@ interface OrbitProps {
 }
 
 const Orbit: React.FC<OrbitProps> = ({
-  radius = 150,
+  radius = 100,
   duration = 5,
   squash = 0.6,
   depthScale = 0.5,

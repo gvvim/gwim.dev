@@ -21,9 +21,8 @@
 }
 
 .carousel-slide-inner {
-  width: 90%;
-  height: fit-content;
-  /* scale: 2; */
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +40,7 @@
 .carousel-slide-inner.prev,
 .carousel-slide-inner.next {
   transform: scale(0.9);
-  opacity: 0.5;
+  opacity: 0.65;
   will-change: opacity;
   transition: 200ms;
   cursor: pointer;
@@ -50,7 +49,7 @@
 
 .carousel-slide-inner.prev:hover,
 .carousel-slide-inner.next:hover {
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
 /* Navigation Dots */
@@ -97,4 +96,24 @@
 .carousel-dot:focus, .carousel-dot:focus-visible {
   outline: none;
   border: none;
+}
+
+@media (max-width: 768px) {
+  .carousel-nav {
+    position: absolute;
+    left: unset;
+    right: 0.5em;
+    bottom: 50%;
+    transform: translateY(50%);
+    flex-direction: column;
+  }
+
+  .carousel-dot {
+    width: 10px;
+    height: 40px;
+  }
+
+  .carousel-track {
+    flex-direction: column;
+  }
 }
