@@ -53,11 +53,11 @@ const AboutMe: React.FC = () => {
                     </a>
                 </div>
 
-                <div className="download-btn">
+                <a href="/Danijel_Andjelkovic_CV.pdf" download className="download-btn">
                     <div className="link-popup">Press to download</div>
                     <p>Resume</p>
                     <img src={downloadIcon}></img>
-                </div>
+                </a>
             </div>
         </div>
     </div>
