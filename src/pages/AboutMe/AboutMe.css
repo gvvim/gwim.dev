@@ -106,10 +106,12 @@
     margin: 8px;
     will-change: box-shadow;
     transition: all 300ms;
+    color: whitesmoke;
 }
 
 .download-btn:hover {
     box-shadow: 0 3px 8px green;
+    color: white;
 }
 
 .download-btn>img {
