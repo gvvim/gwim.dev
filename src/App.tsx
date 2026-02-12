@@ -309,6 +309,12 @@ function App() {
             onInit={(count) => updateCarouselCount(3, count)}
           >
             <ProjectPreview 
+              title="kucna-nega.rs (React)"
+              imgUrl="/projects/kucna-nega.webp"
+              // githubUrl="https://github.com/gvvim/kucna-nega"
+              demoUrl="https://kucna-nega.rs/"
+            />
+            <ProjectPreview 
               title="Gwim.dev (React/Three)"
               imgUrl="/projects/gwim_dev.webp"
               githubUrl="https://github.com/gvvim/gwim.dev"
